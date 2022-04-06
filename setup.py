@@ -41,4 +41,9 @@ setup(
     url='https://github.com/ondrachwiedziuk/mff_pytex',
     version='0.1.0',
     zip_safe=False,
+    entry_points={
+        'console_scripts': [
+            'mff_pytex = mff_ptex.interface.interface:cli',
+        ],
+    },
 )
