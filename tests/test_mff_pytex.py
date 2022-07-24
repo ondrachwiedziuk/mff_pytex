@@ -5,7 +5,7 @@
 import pytest
 
 
-from mff_pytex import mff_pytex
+from src.mff_pytex import structure
 
 
 @pytest.fixture
@@ -23,6 +23,6 @@ def test_content(response):
     # from bs4 import BeautifulSoup
     # assert 'GitHub' in BeautifulSoup(response.content).title.string
 
-def test_testing():
-    """Just test."""
-    assert True
+def test_create_texfile():
+    """Test if texfile is created"""
+    assert structure.TexFile().file_path == structure.TEMPLATE
