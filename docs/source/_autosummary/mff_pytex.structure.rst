@@ -1,4 +1,4 @@
-mff\_pytex.structure
+﻿mff\_pytex.structure
 ====================
 
 .. automodule:: mff_pytex.structure
@@ -9,12 +9,6 @@ mff\_pytex.structure
 
    
    
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      test_docs
-   
    
 
    
@@ -23,6 +17,8 @@ mff\_pytex.structure
 
    .. autosummary::
    
+      Figure
+      Header
       TexFile
    
    
