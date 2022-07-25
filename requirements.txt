@@ -4,7 +4,7 @@ coverage>=6.4.2
 flake8>=4.0.1
 furo>=2022.6.21
 pytest>=7.1.2
-Sphinx>=5.0.0
+Sphinx
 tox>=3.25.1
 twine>=4.0.1
 watchdog>=2.1.9
