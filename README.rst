@@ -19,9 +19,3 @@ MFF PyTeX is a framework for writing tex documents in python.
 
 * Free software: MIT license
 * Documentation: https://mff-pytex.readthedocs.io.
-
-
-Features
---------
-
-* TODO
