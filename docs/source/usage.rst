@@ -1,5 +1,2 @@
 Usage
 =====
-
-Installation
-------------

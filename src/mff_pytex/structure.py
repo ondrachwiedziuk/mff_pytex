@@ -82,7 +82,7 @@ class Figure:
         """
         self.__text = ""
         self.fig_type = fig_type
-        self.writeline(f"\\begin{fig_type}")
+        self.write(f"\\begin{{{self.fig_type}}}")
 
     def __str__(self) -> str:
         """Returns content string encapsuled by figure.
@@ -90,10 +90,10 @@ class Figure:
         Returns:
             str: Content
         """
-        return self.__text + self.fig_type
+        return self.__text + f"\\end{{{self.fig_type}}}"
 
     def writeline(self, text: str) -> None:
-        """Write single line in content.
+        """Write single line to the TeX file.
 
         Args:
             text (str): Line of text intended for insert to content.
@@ -101,7 +101,7 @@ class Figure:
         self.__text += f"{text}\n"
 
     def write(self, *lines: str) -> None:
-        """Write multiple lines in content.
+        """Write multiple lines to the TeX file.
 
         Args:
             *lines (str): Lines of text intended for insert to content.
@@ -110,9 +110,44 @@ class Figure:
             self.writeline(line)
 
     def add(self, figure: Any) -> None:
-        """Writes figure to content.
+        """Writes figure to the TeX file.
 
         Args:
-            figure (Any): Figure intended for insert to content.
+            figure (Any): Figure to use.
         """
-        self.writeline(str(figure))
+        self.write(str(figure))
+
+    def usepackages(self, *pkgs: str) -> None:
+        """Add a usepackage command to the TeX file. Can be used for multiple packages."""
+        for pkg in pkgs:
+            self.write(f"\\usepackage{{{pkg}}}")
+
+    def math(self, formula: str) -> None:
+        self.write(f"\\[ {formula} \\]")
+
+
+class Document(Figure):
+    """Content of document."""
+
+    def __init__(self) -> None:
+        """Initialize document.
+        """
+        self.__text = ""
+        self.fig_type = "document"
+        self.write(f"\\begin{{{self.fig_type}}}")
+
+    def tableofcontents(self) -> None:
+        """Add a tableofcontents command to the TeX file."""
+        self.write("\\tableofcontents")
+
+    def maketitle(self) -> None:
+        """Add a maketitle command to the TeX file."""
+        self.write("\\maketitle")
+
+    def newpage(self) -> None:
+        """Add a newpage command to the TeX file."""
+        self.write("\\newpage")
+
+    def clearpage(self) -> None:
+        """Add a clearpage command to the TeX file."""
+        self.write("\\clearpage")

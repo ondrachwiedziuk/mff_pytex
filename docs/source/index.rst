@@ -14,7 +14,7 @@ Welcome to MFF Pytex's documentation!
    
    installation
    usage
-   api
+   modules
 
 
 Indices and tables
