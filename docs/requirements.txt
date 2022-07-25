@@ -1,2 +1,2 @@
-sphinx
+Sphinx==5.1.0
 furo>=2022.6.21
