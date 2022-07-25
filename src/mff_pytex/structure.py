@@ -1,7 +1,7 @@
 """Module containing basic structure of file."""
 
 from datetime import date
-from typing import Any
+from typing import Any, Optional
 
 
 TEMPLATE = "path_to_template"
@@ -16,7 +16,7 @@ class TexFile:
         body (Body): Body of a file.
     """
 
-    def __init__(self, file_path: str | None = None) -> None:
+    def __init__(self, file_path: Optional[str] = None) -> None:
         """Initialize TexFile
 
         Args:
@@ -51,9 +51,9 @@ class Header:
         date (date): Date of creation of document
     """
     def __init__(self,
-                 title: str | None = None,
-                 author: str | None = None,
-                 date: date | None = None) -> None:
+                 title: Optional[str] = None,
+                 author: Optional[str] = None,
+                 date: Optional[date] = None) -> None:
         """Initialize Header
 
         Args:
