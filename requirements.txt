@@ -25,7 +25,6 @@ Jinja2==3.1.2
 keyring==23.7.0
 MarkupSafe==2.1.1
 mccabe==0.6.1
-mff-pytex @ file:///home/ondra/mff_pytex/dist/mff_pytex-0.1.1.tar.gz
 packaging==21.3
 pep517==0.12.0
 pkginfo==1.8.3
