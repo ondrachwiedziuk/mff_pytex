@@ -73,7 +73,7 @@ class Preamble:
         self._packages = packages
 
     @property
-    def title(self) -> str | None:
+    def title(self) -> Optional[str]:
         """Title getter returns title as TeX command
 
         Returns:
@@ -91,7 +91,7 @@ class Preamble:
         self._title = title
 
     @property
-    def author(self) -> str | None:
+    def author(self) -> Optional[str]:
         """Author getter returns author as TeX command
 
         Returns:
@@ -109,7 +109,7 @@ class Preamble:
         self._author = author
 
     @property
-    def date(self) -> str | None:
+    def date(self) -> Optional[str]:
         """Date getter returns date as TeX command
 
         Returns:
@@ -127,7 +127,7 @@ class Preamble:
         self._date = date
 
     @property
-    def packages(self) -> str | None:
+    def packages(self) -> Optional[str]:
         """Packages getter returns packages as TeX commands
 
         Returns:
@@ -179,7 +179,7 @@ class Writing:
         """
         self._text += f"{text}\n"
 
-    def write(self, *lines: str | None) -> None:
+    def write(self, *lines: Optional[str]) -> None:
         """Write multiple lines to the TeX file.
 
         Args:
