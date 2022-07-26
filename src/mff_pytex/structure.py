@@ -1,6 +1,6 @@
 """Module containing basic structure of file."""
 
-from datetime import date
+from datetime import date as datum
 from typing import Any, Optional
 
 
@@ -72,48 +72,124 @@ class Preamble:
         title (str): Title of document
         author (str): Author's name
         date (date): Date of creation of document
+        packages (list[Package]): packages to use
     """
     def __init__(self,
                  title: Optional[str] = None,
                  author: Optional[str] = None,
-                 date: Optional[date] = None) -> None:
+                 date: Optional[datum] = None,
+                 packages: list[Any] = []) -> None:
         """Initialize Preamble
 
         Args:
             title (str): Title of document, defaults None
             author (str): Author's name, defaults None
             date (date): Date of creation of document, defaults None
+            packages (list[Package]): packages to use, defaults []
         """
-        self.title = title
-        self.author = author
-        self.date = date
+        self._title = title
+        self._author = author
+        self._date = date
+        self._packages = packages
 
-
-class Figure:
-    """Basic figure structure.
-
-    Attributes:
-        fig_type (str): Type of figure
-        _text (str): Content of figure,
-    """
-
-    def __init__(self, fig_type: str, *params: str) -> None:
-        """Initialize Figure.
-
-        Args:
-            fig_type (str): Type of figure
-        """
-        self._text = ""
-        self.fig_type = fig_type
-        self.write(command('begin', self.fig_type))
-
-    def __str__(self) -> str:
-        """Returns content string encapsuled by figure.
+    @property
+    def title(self) -> str | None:
+        """Title getter returns title as TeX command
 
         Returns:
-            str: Content
+            str: Title command
         """
-        return self._text + command('end', self.fig_type)
+        return command('title', self._title) if self._title is not None else None
+
+    @title.setter
+    def title(self, title: str) -> None:
+        """Title setter
+
+        Args:
+            title (str): New title
+        """
+        self._title = title
+
+    @property
+    def author(self) -> str | None:
+        """Author getter returns author as TeX command
+
+        Returns:
+            str: Author command
+        """
+        return command('author', self._author) if self._author is not None else None
+
+    @author.setter
+    def author(self, author: str) -> None:
+        """Author setter
+
+        Args:
+            author (str): New author
+        """
+        self._author = author
+
+    @property
+    def date(self) -> str | None:
+        """Date getter returns date as TeX command
+
+        Returns:
+            str: Date command
+        """
+        return command('date', str(self._date)) if self._date is not None else None
+
+    @date.setter
+    def date(self, date: datum) -> None:
+        """Date setter
+
+        Args:
+            date (str): New date
+        """
+        self._date = date
+
+    @property
+    def packages(self) -> str | None:
+        """Packages getter returns packages as TeX commands
+
+        Returns:
+            str: package commands
+        """
+        text = Writing()
+        for package in self._packages:
+            text.write(str(package))
+        return str(text)
+
+    @packages.setter
+    def packages(self, packages: list[Any]) -> None:
+        """Packages setter
+
+        Args:
+            packages (list[Packages]): New packages to use
+        """
+        if packages is None:
+            packages = []
+        self._packages = packages
+
+    def __str__(self) -> str:
+        """Returns Preamble as string in TeX form.
+
+        Returns:
+            str: Preamble in TeX form.
+        """
+        text = Writing()
+        if self.packages != "":
+            text.write(self.packages)
+        text.write('')
+        text.write(self.title)
+        text.write(self.author)
+        text.write(self.date)
+        return str(text)
+
+
+class Writing:
+    _text = ""
+
+    def __str__(self) -> str:
+        return self._text
 
     def _writeline(self, text: str) -> None:
         """Write single line to the TeX file.
@@ -123,54 +199,67 @@ class Figure:
         """
         self._text += f"{text}\n"
 
-    def write(self, *lines: str) -> None:
+    def write(self, *lines: str | None) -> None:
         """Write multiple lines to the TeX file.
 
         Args:
             *lines (str): Lines of text intended for insert to content.
         """
         for line in lines:
-            self._writeline(line)
+            if line is not None:
+                self._writeline(line)
 
-    def add(self, figure: Any) -> None:
-        """Writes figure to the TeX file.
-
-        Args:
-            figure (Any): Figure to use.
-        """
-        self.write(str(figure))
-
-    def usepackage(self, pkg: str, *params: str) -> None:
-        """Add a usepackage command to the TeX file. Optional params can be used.
+    def add(self, environment: Any) -> None:
+        """Writes environment to the TeX file.
 
         Args:
-            pkg (str): Package to use
-            *params (str): Optional parameters for package
+            environment (Any): Figure to use.
         """
-        self.write(command('usepackage', pkg, *params))
+        self.write(str(environment))
 
-    def usepackages(self, *pkgs: str) -> None:
-        """Add a usepackage command to the TeX file. Can be used for multiple packages.
+
+class Environment(Writing):
+    """Basic environment structure.
+
+    Attributes:
+        en_type (str): Type of environment
+        _text (str): Content of environment,
+    """
+
+    def __init__(self, en_type: str, *params: str) -> None:
+        """Initialize Environment.
 
         Args:
-            *pkgs (str): Packages to use, can be multiple of them.
+            en_type (str): Type of environment
+            *params (str): Optional parameters for environment
         """
-        for pkg in pkgs:
-            self.usepackage(pkg)
+        self.en_type = en_type
+        if params:
+            self.write(command('begin', self.en_type, *params))
+        else:
+            self.write(command('begin', self.en_type))
+
+    def __str__(self) -> str:
+        """Returns content string encapsuled by environment.
+
+        Returns:
+            str: Content
+        """
+        return self._text + command('end', self.en_type)
 
     def math(self, formula: str) -> None:
         self.write(f"\\[ {formula} \\]")
 
 
-class Document(Figure):
+class Document(Environment):
     """Content of document."""
 
     def __init__(self) -> None:
         """Initialize document.
         """
         self._text = ""
-        self.fig_type = "document"
-        self.write(command('begin', self.fig_type))
+        self.en_type = "document"
+        self.write(command('begin', self.en_type))
 
     def tableofcontents(self) -> None:
         """Add a tableofcontents command to the TeX file."""
@@ -189,5 +278,13 @@ class Document(Figure):
         self.write(command('clearpage'))
 
 
-class Table(Figure):
+class Table(Environment):
     pass
+
+class Package:
+    def __init__(self, name: str, *params: str) -> None:
+        self.name = name
+        self.optional = params
+
+    def __str__(self) -> str:
+        return command('usepackage', self.name, *self.optional)

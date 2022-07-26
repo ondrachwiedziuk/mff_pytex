@@ -3,12 +3,12 @@
 """Tests for `mff_pytex` package."""
 
 import pytest
-from src.mff_pytex import structure
+from src.mff_pytex.structure import command, TexFile, TEMPLATE
 
 
 def test_create_texfile():
     """Test if texfile is created"""
-    assert structure.TexFile().file_path == structure.TEMPLATE
+    assert TexFile().file_path == TEMPLATE
 
 # def test_document():
 #     figure = structure.Document()
@@ -20,12 +20,12 @@ def test_create_texfile():
 
 def test_command_makefile():
     """Test if command makefile works properly"""
-    assert structure.command('makefile') == "\\makefile"
+    assert command('makefile') == "\\makefile"
 
 def test_command_begin_document():
     """Test if command begin works properly"""
-    assert structure.command('begin', 'document') == "\\begin{document}"
+    assert command('begin', 'document') == "\\begin{document}"
 
 def test_command_usepackage():
     """Test if command usepackage properly"""
-    assert structure.command('usepackage', 'inputenc', 'utf8') == "\\usepackage[utf8]{inputenc}"
+    assert command('usepackage', 'inputenc', 'utf8') == "\\usepackage[utf8]{inputenc}"
