@@ -7,3 +7,4 @@ Sphinx==5.1.0
 tox>=3.25.1
 twine>=4.0.1
 watchdog>=2.1.9
+typing-extensions
