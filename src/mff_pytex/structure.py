@@ -58,7 +58,7 @@ class Preamble:
                  title: Optional[str] = None,
                  author: Optional[str] = None,
                  date: Optional[datum] = None,
-                 packages: list[Type[Package]] = []) -> None:
+                 packages: list = []) -> None:
         """Initialize Preamble
 
         Args:
