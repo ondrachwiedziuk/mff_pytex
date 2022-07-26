@@ -139,7 +139,7 @@ class Preamble:
         return str(text)
 
     @packages.setter
-    def packages(self, packages: list[Type[Package]]) -> None:
+    def packages(self, packages: list) -> None:
         """Packages setter
 
         Args:
