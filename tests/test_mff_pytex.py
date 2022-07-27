@@ -3,12 +3,8 @@
 """Tests for `mff_pytex` package."""
 
 import pytest
-from src.mff_pytex.structure import command, TexFile, TEMPLATE
+from src.mff_pytex.structure import command
 
-
-def test_create_texfile():
-    """Test if texfile is created"""
-    assert TexFile().file_path == TEMPLATE
 
 # def test_document():
 #     figure = structure.Document()
