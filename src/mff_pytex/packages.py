@@ -11,3 +11,5 @@ class Package:
 
     def __str__(self) -> str:
         return command('usepackage', self.name, *self.optional)
+
+# TODO Autoimport packages by used environments and commands

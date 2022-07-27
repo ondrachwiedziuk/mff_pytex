@@ -7,6 +7,8 @@ from mff_pytex.utils import command, get_dir
 from mff_pytex.packages import Package
 import os
 
+# TODO importing and another document structuring
+
 
 class Preamble:
     """Preamble contains basic info about author and document.
