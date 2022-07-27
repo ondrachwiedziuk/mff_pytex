@@ -46,3 +46,19 @@ def command(comm: str, main: Optional[str] = None, *params) -> str:
         return f"\\{comm}[{', '.join(params)}]{{{main}}}"
     else:
         return f"\\{comm}{{{main}}}"
+
+
+def doublecommand(comm: str, main: str, second: str) -> str:
+    """Template for creating doublecommands.
+
+    Commands lokks like this \\comm{main} {second}
+
+    Args:
+        comm (str): Name of command
+        main (str): First parameter
+        second (str): Second parameter
+
+    Returns:
+        str: string of given command by given parameters.
+    """
+    return f"\\{comm}{{{main}}} {{{second}}}"
