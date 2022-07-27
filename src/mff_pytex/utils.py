@@ -3,6 +3,26 @@
 
 from datetime import date as datum
 from typing import Any, Optional
+import sys
+from os import path
+
+
+def get_dir() -> str:
+    """Returns directory where main file has been executed.
+
+    Returns:
+        str: Directory name where is main file
+    """
+    return str(path.dirname(str(sys.modules['__main__'].__file__)))
+
+
+def get_path() -> str:
+    """Returns path to main file.
+
+    Returns:
+        str: Path to main file
+    """
+    return str(path.abspath(str(sys.modules['__main__'].__file__)))
 
 
 def command(comm: str, main: Optional[str] = None, *params) -> str:

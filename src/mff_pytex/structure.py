@@ -3,46 +3,9 @@
 from datetime import date as datum
 from typing import Type, Optional
 from typing_extensions import Self
-from mff_pytex.utils import command
+from mff_pytex.utils import command, get_dir
 from mff_pytex.packages import Package
-
-
-TEMPLATE = "path_to_template"
-
-
-class TexFile:
-    """Basic TeX file structure.
-
-    Attributes:
-        file_path (str): Path to initialized file.
-        preamble (Preamble): Preamble of file.
-        body (Body): Body of a file.
-    """
-
-    def __init__(self, file_path: Optional[str] = None) -> None:
-        """Initialize TexFile
-
-        Args:
-            file_path (str | None): Path to initialized file. If None, than use blank template.
-        """
-        if file_path is None:
-            file_path = TEMPLATE
-
-        self.file_path = file_path
-        self._load_doc()
-
-    def _load_doc(self) -> None:
-        """Load pytex document by source .tex file.
-        """
-        pass
-
-    def _print_doc(self, path: str) -> None:
-        """Prints pytex document to .tex file. """
-        pass
-
-    def _create_pdf(self, path: str) -> None:
-        """Create pdf file from pytex document. """
-        pass
+import os
 
 
 class Preamble:
@@ -256,3 +219,46 @@ class Document(Environment):
     def clearpage(self) -> None:
         """Add a clearpage command to the TeX file."""
         self.write(command('clearpage'))
+
+
+class TexFile:
+    """Basic TeX file structure.
+
+    Attributes:
+        file_path (str): Path to initialized file.
+        preamble (Preamble): Preamble of file.
+        body (Body): Body of a file.
+    """
+
+    preamble = Preamble()
+    document = Document()
+
+    def __init__(self, file_name: str) -> None:
+        """Initialize TexFile
+
+        Args:
+            file_name str: Name of file which will be created.
+        """
+
+        self.file_path = f"{get_dir()}\\{file_name}.tex"
+
+    def create(self, mode: str = 'w+') -> None:
+        """Creates file and writes its content.
+
+        Args:
+            mode (str): mode of given file. Same as open() function.
+        """
+        tex = open(self.file_path, mode)
+        tex.write(str(self.preamble))
+        tex.write(str(self.document))
+        tex.close()
+
+    def make_pdf(self, mode: str = 'r') -> None:
+        """Creates pdf file, if neccessary writes its content and create pdf document.
+
+        Args:
+            mode (str): mode of given file. Same as open() function.
+        """
+        if mode not in ['r']:
+            self.create(mode)
+        os.system(f"pdflatex {self.file_path}")
