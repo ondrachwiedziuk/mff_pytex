@@ -3,7 +3,7 @@
 """Tests for `mff_pytex` package."""
 
 import pytest
-from src.mff_pytex.structure import command
+from src.mff_pytex.utils import command
 
 
 # def test_document():

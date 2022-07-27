@@ -240,7 +240,7 @@ class TexFile:
             file_name str: Name of file which will be created.
         """
 
-        self.file_path = f"{get_dir()}\\{file_name}.tex"
+        self.file_path = f"{get_dir()}/{file_name}.tex"
 
     def create(self, mode: str = 'w+') -> None:
         """Creates file and writes its content.
