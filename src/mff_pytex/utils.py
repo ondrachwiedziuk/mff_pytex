@@ -62,3 +62,36 @@ def doublecommand(comm: str, main: str, second: str) -> str:
         str: string of given command by given parameters.
     """
     return f"\\{comm}{{{main}}} {{{second}}}"
+
+
+class PreambleProperty:
+    """Template for preamble attribute properties."""
+
+    def __init__(self, name: str) -> None:
+        """Initialize given attribute by name.
+
+        Args:
+            name (str): Name of attribute.
+        """
+        self.name = f'_{name}'
+
+    def __get__(self, obj) -> Optional[str]:
+        """Getter template.
+
+        Args:
+            obj: Object that use this template for given property.
+
+        Returns:
+            str: String in form of TeX command for this attribute.
+        """
+        value = getattr(obj, self.name)
+        return command(self.name[1:], str(value)) if value is not None else None
+
+    def __set__(self, obj, value) -> None:
+        """Setter template.
+
+        Args:
+            obj: Object that use this template for given property.
+            value: New value of attribute.
+        """
+        setattr(obj, self.name, value)

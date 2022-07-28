@@ -3,7 +3,7 @@
 from datetime import date as datum
 from typing import Type, Optional
 from typing_extensions import Self
-from mff_pytex.utils import command, get_dir
+from mff_pytex.utils import command, get_dir, PreambleProperty
 from mff_pytex.packages import Package
 import os
 
@@ -19,6 +19,11 @@ class Preamble:
         date (date): Date of creation of document
         packages (list[Package]): packages to use
     """
+
+    title = PreambleProperty('title')
+    author = PreambleProperty('author')
+    date = PreambleProperty('date')
+
     def __init__(self,
                  title: Optional[str] = None,
                  author: Optional[str] = None,
@@ -36,60 +41,6 @@ class Preamble:
         self._author = author
         self._date = date
         self._packages = packages
-
-    @property
-    def title(self) -> Optional[str]:
-        """Title getter returns title as TeX command
-
-        Returns:
-            str: Title command
-        """
-        return command('title', self._title) if self._title is not None else None
-
-    @title.setter
-    def title(self, title: str) -> None:
-        """Title setter
-
-        Args:
-            title (str): New title
-        """
-        self._title = title
-
-    @property
-    def author(self) -> Optional[str]:
-        """Author getter returns author as TeX command
-
-        Returns:
-            str: Author command
-        """
-        return command('author', self._author) if self._author is not None else None
-
-    @author.setter
-    def author(self, author: str) -> None:
-        """Author setter
-
-        Args:
-            author (str): New author
-        """
-        self._author = author
-
-    @property
-    def date(self) -> Optional[str]:
-        """Date getter returns date as TeX command
-
-        Returns:
-            str: Date command
-        """
-        return command('date', str(self._date)) if self._date is not None else None
-
-    @date.setter
-    def date(self, date: datum) -> None:
-        """Date setter
-
-        Args:
-            date (str): New date
-        """
-        self._date = date
 
     @property
     def packages(self) -> Optional[str]:
