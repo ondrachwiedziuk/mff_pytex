@@ -20,9 +20,9 @@ class Preamble:
         packages (list[Package]): packages to use
     """
 
-    title = PreambleProperty('title')
-    author = PreambleProperty('author')
-    date = PreambleProperty('date')
+    title = PreambleProperty()
+    author = PreambleProperty()
+    date = PreambleProperty()
 
     def __init__(self,
                  title: Optional[str] = None,
@@ -37,18 +37,13 @@ class Preamble:
             date (date): Date of creation of document, defaults None
             packages (list[Package]): packages to use, defaults []
         """
-        self._title = title
-        self._author = author
-        self._date = date
-        self._packages = packages
+        self.title = title
+        self.author = author
+        self.date = date
+        self.packages = packages
 
     @property
     def packages(self) -> Optional[str]:
-        """Packages getter returns packages as TeX commands
-
-        Returns:
-            str: package commands
-        """
         text = Writing()
         for package in self._packages:
             text.write(str(package))
@@ -56,13 +51,6 @@ class Preamble:
 
     @packages.setter
     def packages(self, packages: list) -> None:
-        """Packages setter
-
-        Args:
-            packages (list[Packages]): New packages to use
-        """
-        if packages is None:
-            packages = []
         self._packages = packages
 
     def __str__(self) -> str:
@@ -77,7 +65,7 @@ class Preamble:
         text.write('')
         text.write(self.title)
         text.write(self.author)
-        text.write(self.date)
+        text.write(str(self.date))
         return str(text)
 
 
@@ -141,7 +129,7 @@ class Environment(Writing):
         Returns:
             str: Content
         """
-        return self._text + command('end', self.en_type)
+        return self._text + command('end', self.en_type) + '\n'
 
     def math(self, formula: str) -> None:
         self.write(f"\\[ {formula} \\]")

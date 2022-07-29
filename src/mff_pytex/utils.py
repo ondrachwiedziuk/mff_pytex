@@ -64,28 +64,52 @@ def doublecommand(comm: str, main: str, second: str) -> str:
     return f"\\{comm}{{{main}}} {{{second}}}"
 
 
-class PreambleProperty:
-    """Template for preamble attribute properties."""
+class TemplateProperty:
+    """Abstract descriptor class.
 
-    def __init__(self, name: str) -> None:
+    Example:
+        class Example:
+            attr = TemplateProperty()
+
+    Attributes:
+        public_name (str): public name of attribute.
+        protected_name (str): protected name of attribute.
+    """
+    def __set_name__(self, owner, name: str) -> None:
         """Initialize given attribute by name.
 
         Args:
+            owner: Class with given attribute.
             name (str): Name of attribute.
         """
-        self.name = f'_{name}'
+        self.public_name = name
+        self.private_name = f'_{name}'
 
-    def __get__(self, obj) -> Optional[str]:
+class PreambleProperty(TemplateProperty):
+    """Template for preamble attribute properties.
+
+        Example:
+            class Example:
+                attr = PreambleProperty()
+
+            obj = Example()
+            obj.attr = 'name' # set attr as 'name' string
+
+            print(obj.attr) # return attribute as TeX command string.
+        """
+
+    def __get__(self, obj, objtype=None) -> Optional[str]:
         """Getter template.
 
         Args:
             obj: Object that use this template for given property.
+            objtype: type of object.
 
         Returns:
             str: String in form of TeX command for this attribute.
         """
-        value = getattr(obj, self.name)
-        return command(self.name[1:], str(value)) if value is not None else None
+        value = getattr(obj, self.private_name)
+        return command(self.public_name, str(value)) if value is not None else None
 
     def __set__(self, obj, value) -> None:
         """Setter template.
@@ -94,4 +118,4 @@ class PreambleProperty:
             obj: Object that use this template for given property.
             value: New value of attribute.
         """
-        setattr(obj, self.name, value)
+        setattr(obj, self.private_name, value)
