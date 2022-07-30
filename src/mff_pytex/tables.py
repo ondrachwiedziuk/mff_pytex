@@ -10,13 +10,13 @@ from pandas import DataFrame
 
 class Table:
     """Table structure. Converts pandas' dataframe to TeX table.
+    Note:
+        Requires booktabs package to import, add with autopackage management.
 
     Attributes:
         df (DataFrame): Dataframe containing table.
         styles: Contains parameters for to_latex method of DataFrame. More info in pandas docs.
 
-    Todo:
-        * Requires booktabs package to import, add with autopackage management.
     """
     table = 'table'
 
