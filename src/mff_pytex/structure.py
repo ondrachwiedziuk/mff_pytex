@@ -12,12 +12,6 @@ import os
 
 class Preamble:
     """Preamble contains basic info about author and document.
-
-    Attributes:
-        title (str): Title of document
-        author (str): Author's name
-        date (date): Date of creation of document
-        packages (list[Package]): packages to use
     """
 
     title = PreambleProperty()
@@ -167,7 +161,6 @@ class TexFile:
 
     Attributes:
         file_path (str): Path to initialized file.
-        preamble (Preamble): Preamble of file.
         body (Body): Body of a file.
     """
 

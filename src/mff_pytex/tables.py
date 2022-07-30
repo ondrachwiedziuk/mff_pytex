@@ -59,7 +59,6 @@ class Table(Writing):
     """Table structure. Converts pandas' dataframe to TeX table.
 
     Attributes:
-        style (Style): Style of given table in TeX
         dataframe (DataFrame): Dataframe containing table.
     """
 
