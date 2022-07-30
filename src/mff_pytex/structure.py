@@ -1,10 +1,9 @@
 """Module containing basic structure of file."""
 
 from datetime import date as datum
-from typing import Type, Optional
+from typing import Optional
 from typing_extensions import Self
 from mff_pytex.utils import command, get_dir, PreambleProperty
-from mff_pytex.packages import Package
 import os
 
 # TODO importing and another document structuring

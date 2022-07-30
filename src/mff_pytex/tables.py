@@ -1,103 +1,37 @@
 """Tables and lists utilities and support for pandas dataframe."""
 
 from typing import Any, Optional, Union
-from collections.abc import Container, Sequence
-from typing_extensions import Self
-from mff_pytex.utils import command, doublecommand
-from mff_pytex.structure import Environment, Writing
+from collections.abc import Sequence
+from mff_pytex.utils import command
+from mff_pytex.structure import Environment
 from mff_pytex.exeptions import WrongTypeListError
 from pandas import DataFrame
 
 
-class Style:
-    """Style class takes table style settings and create TeX description of style.
-
-    Attributes:
-        columns (int): Count of columns of table.
-        styles (dict): dictionary containing all style settings.
-        centering (str): Centering of table.
-    """
-
-    def __init__(self, columns: int, **styles: Any) -> None:
-        """Initialize Style class.
-
-        Args:
-            columns (int): Count of columns of table.
-            **styles (Any): All settings of style.
-        """
-        self.columns = columns
-        self.styles = styles
-        self.centering = self.contains('centering')
-
-    def contains(self, attr: str) -> Any:
-        """Check if given attribute is in user-defined styles.
-
-        Args:
-            attr (str): Name of attribute.
-
-        Returns:
-            Any: attribute value setted by user. If not, than None.
-        """
-        if attr in self.styles.keys():
-            return self.styles[attr]
-        else:
-            return None
-
-    def __str__(self) -> str:
-        """Returns Style object as TeX string.
-
-        Returns:
-            str: TeX description of style.
-        """
-        if self.centering is None:
-            self.centering = 'c'
-        settings = 'c' * self.columns
-        return settings
-
-
-class Table(Writing):
+class Table:
     """Table structure. Converts pandas' dataframe to TeX table.
 
     Attributes:
-        dataframe (DataFrame): Dataframe containing table.
+        df (DataFrame): Dataframe containing table.
+        styles: Contains parameters for to_latex method of DataFrame. More info in pandas docs.
+
+    Todo:
+        * Requires booktabs package to import, add with autopackage management.
     """
+    table = 'table'
 
     def __init__(self, dataframe: DataFrame, **styles: Any) -> None:
         """Initialize Table.
 
         Args:
-            dataframe (DataFrame): Dataframe containing table.
-            **styles (Any): Style of table.
+            df (DataFrame): Dataframe containing table.
+            **styles (Any): Parameters for to_latex method of DataFrame.
         """
-        self.en_type = 'tabular'
-        self.dataframe = dataframe
-        self._style = Style(**styles)
-
-    @property
-    def style(self) -> str:
-        return str(self._style)
-
-    @style.setter
-    def style(self, **style) -> None:
-        self._style = Style(**style)
-
-    def dftotex(self) -> None:
-        """Converts DataFrame to TeX table.
-        Todo:
-            * Implementation
-        """
-        pass
+        self.df = dataframe
+        self.styles = styles
 
     def __str__(self) -> str:
-        """Table as string in TeX form.
-
-        Returns:
-            str: string containing given table formatted by given style in TeX.
-        """
-        self.write(doublecommand('begin', self.en_type, self.style))
-        self.dftotex()
-        self.write(command('end', self.en_type))
-        return self._text
+        return self.df.to_latex(**self.styles)
 
 
 class List(Environment):

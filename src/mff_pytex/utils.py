@@ -48,7 +48,7 @@ def command(comm: str, main: Optional[str] = None, *params) -> str:
         return f"\\{comm}{{{main}}}"
 
 
-def doublecommand(comm: str, main: str, second: str) -> str:
+def doublecommand(comm: str, main: str, second: Optional[str], opt: bool = False) -> str:
     """Template for creating doublecommands.
 
     Commands lokks like this \\comm{main} {second}
@@ -57,11 +57,17 @@ def doublecommand(comm: str, main: str, second: str) -> str:
         comm (str): Name of command
         main (str): First parameter
         second (str): Second parameter
+        opt (bool): Set if the second parameter is optional
 
     Returns:
         str: string of given command by given parameters.
     """
-    return f"\\{comm}{{{main}}} {{{second}}}"
+    if second is None:
+        return f"\\{comm}{{{main}}}"
+    elif opt:
+        return f"\\{comm}{{{main}}} [{second}]"
+    else:
+        return f"\\{comm}{{{main}}} {{{second}}}"
 
 
 class TemplateProperty:
