@@ -2,11 +2,46 @@
 
 from datetime import date as datum
 from typing import Optional
-from typing_extensions import Self
-from mff_pytex.utils import command, get_dir, PreambleProperty
+from mff_pytex.utils import command, get_dir, Writing, Environment, TemplateProperty
 import os
 
 # TODO importing and another document structuring
+
+
+class PreambleProperty(TemplateProperty):
+    """Template for preamble attribute properties.
+
+        Example:
+            class Example:
+                attr = PreambleProperty()
+
+            obj = Example()
+            obj.attr = 'name' # set attr as 'name' string
+
+            print(obj.attr) # return attribute as TeX command string.
+        """
+
+    def __get__(self, obj, objtype=None) -> Optional[str]:
+        """Getter template.
+
+        Args:
+            obj: Object that use this template for given property.
+            objtype: type of object.
+
+        Returns:
+            str: String in form of TeX command for this attribute.
+        """
+        value = getattr(obj, self.private_name)
+        return command(self.public_name, str(value)) if value is not None else None
+
+    def __set__(self, obj, value) -> None:
+        """Setter template.
+
+        Args:
+            obj: Object that use this template for given property.
+            value: New value of attribute.
+        """
+        setattr(obj, self.private_name, value)
 
 
 class Preamble:
@@ -60,72 +95,6 @@ class Preamble:
         text.write(self.author)
         text.write(str(self.date))
         return str(text)
-
-
-class Writing:
-    _text = ""
-
-    def __str__(self) -> str:
-        return self._text
-
-    def _writeline(self, text: str) -> None:
-        """Write single line to the TeX file.
-
-        Args:
-            text (str): Line of text intended for insert to content.
-        """
-        self._text += f"{text}\n"
-
-    def write(self, *lines: Optional[str]) -> None:
-        """Write multiple lines to the TeX file.
-
-        Args:
-            *lines (str): Lines of text intended for insert to content.
-        """
-        for line in lines:
-            if line is not None:
-                self._writeline(line)
-
-    def add(self, environment: Self) -> None:
-        """Writes environment to the TeX file.
-
-        Args:
-            environment (Any): Figure to use.
-        """
-        self.write(str(environment))
-
-
-class Environment(Writing):
-    """Basic environment structure.
-
-    Attributes:
-        en_type (str): Type of environment
-        _text (str): Content of environment,
-    """
-
-    def __init__(self, en_type: str, *params: str) -> None:
-        """Initialize Environment.
-
-        Args:
-            en_type (str): Type of environment
-            *params (str): Optional parameters for environment
-        """
-        self.en_type = en_type
-        if params:
-            self.write(command('begin', self.en_type, *params))
-        else:
-            self.write(command('begin', self.en_type))
-
-    def __str__(self) -> str:
-        """Returns content string encapsuled by environment.
-
-        Returns:
-            str: Content
-        """
-        return self._text + command('end', self.en_type) + '\n'
-
-    def math(self, formula: str) -> None:
-        self.write(f"\\[ {formula} \\]")
 
 
 class Document(Environment):

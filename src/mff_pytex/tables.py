@@ -2,8 +2,7 @@
 
 from typing import Any, Optional, Union
 from collections.abc import Sequence
-from mff_pytex.utils import command
-from mff_pytex.structure import Environment
+from mff_pytex.utils import command, Environment
 from mff_pytex.exeptions import WrongTypeListError
 from pandas import DataFrame
 
@@ -18,7 +17,6 @@ class Table:
         styles: Contains parameters for to_latex method of DataFrame. More info in pandas docs.
 
     """
-    table = 'table'
 
     def __init__(self, dataframe: DataFrame, **styles: Any) -> None:
         """Initialize Table.
