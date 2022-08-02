@@ -8,6 +8,26 @@ from typing_extensions import Self
 from os import path
 
 
+class File:
+    """Abstract class for generating files.
+
+    Attributes:
+        file_type (str): Type of created file eg. 'tex', 'bib'.
+        file_path (str): Path to initialized file.
+    """
+    file_type: str
+    file_path: str
+
+    def __init__(self, file_name: str) -> None:
+        """Initialize File
+
+        Args:
+            file_name (str): Name of file which will be created.
+        """
+
+        self.file_path = f"{get_dir()}/{file_name}.{self.file_type}"
+
+
 def get_func_name() -> str:
     """Utility that returns name of function.
 
