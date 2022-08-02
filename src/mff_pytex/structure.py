@@ -12,11 +12,24 @@ from mff_pytex.packages import get_packages
 
 
 class DocumentClass:
-    def __init__(self, name, *params) -> None:
+    """Document class command.
+    """
+    def __init__(self, name: str, *params: str) -> None:
+        """Initialize Docuemnt class.
+
+        Args:
+            name (str): name of docuemnt type
+            *params (str): settings of document
+        """
         self.name = name
         self.params = params
 
     def __str__(self) -> str:
+        """Returns documentclass command.
+
+        Returns:
+            str: documentclass command
+        """
         return command('documentclass', self.name, *self.params)
 
 
