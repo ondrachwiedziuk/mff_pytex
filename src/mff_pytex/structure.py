@@ -2,7 +2,7 @@
 
 from datetime import date as datum
 from typing import Optional
-from mff_pytex.utils import command, get_dir, Writing, Environment, get_func_name
+from mff_pytex.utils import command, get_dir, Writing, Environment, get_func_name, File
 import os
 from dataclasses import dataclass
 from mff_pytex.packages import get_packages
@@ -95,25 +95,16 @@ class Document(Environment):
         """Adds a listoftables command to the TeX file."""
         self.write(command(get_func_name()))
 
-class TexFile:
-    """Basic TeX file structure.
+class TexFile(File):
+    """TeX file.
 
     Attributes:
-        file_path (str): Path to initialized file.
-        body (Body): Body of a file.
+        preamble (Preamble): preamble defining structure of file.
+        document (Document): Main body of a file.
     """
-
-    preamble = Preamble()
-    document = Document()
-
-    def __init__(self, file_name: str) -> None:
-        """Initialize TexFile
-
-        Args:
-            file_name str: Name of file which will be created.
-        """
-
-        self.file_path = f"{get_dir()}/{file_name}.tex"
+    file_type = 'tex'
+    preamble: Preamble = Preamble()
+    document: Document = Document()
 
     def create(self, mode: str = 'w+') -> None:
         """Creates file and writes its content.

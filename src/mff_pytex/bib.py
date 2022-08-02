@@ -2,6 +2,7 @@
 
 from typing import Optional
 from dataclasses import dataclass
+from mff_pytex.utils import File
 
 @dataclass
 class Bib:
@@ -400,5 +401,16 @@ class Unpublished(Bib):
     year: Optional[int] = None
 
 
-class Bibliography:
-    pass
+class Bibliography(File):
+    """Bib file
+
+    Attributes:
+        bib_list (list[Bib]): bibliography list.
+    """
+    file_type = 'bib'
+    bib_list: list[Bib] = []
+
+    def create(self, mode: str = 'w+') -> None:
+        bib = open(self.file_path, mode)
+        bib.write(*map(str, self.bib_list))
+        bib.close()
