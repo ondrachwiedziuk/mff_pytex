@@ -6,10 +6,7 @@ from mff_pytex.utils import File
 
 @dataclass
 class Bib:
-    """Abstract class for bibliography
-
-    Attributes:
-        name: intern name of given bibliography
+    """Abstract class for bibliography.
     """
     name: str
 
@@ -34,17 +31,6 @@ class Bib:
 @dataclass
 class Article(Bib):
     """An article from a magazine or a journal.
-
-    Attributes:
-        title (str)
-        year (int)
-        author (str)
-        journal (str)
-        month (str, optional)
-        note: (str, optional)
-        number: (str, optional)
-        pages: (str, optional)
-        volume: (str, optional)
     """
     title: str
     year: int
@@ -60,20 +46,6 @@ class Article(Bib):
 @dataclass
 class Book(Bib):
     """A published book
-
-    Attributes:
-        title (str)
-        year (int)
-        author (str)
-        publisher (str)
-        address (str, optional)
-        edition (str, optional)
-        editor (str, optional)
-        month (str, optional)
-        note (str, optional)
-        number (int, optional)
-        series (str, optional)
-        volume (str, optional)
     """
     title: str
     year: int
@@ -92,14 +64,6 @@ class Book(Bib):
 @dataclass
 class Booklet(Bib):
     """A bound work without a named publisher or sponsor.
-
-    Attributes:
-        title (str)
-        author (str, optional)
-        howpublished (str, optional)
-        year (int, optional)
-        month (str, optional)
-        note (str, optional)
     """
     title: str
     author: Optional[str] = None
@@ -112,22 +76,6 @@ class Booklet(Bib):
 @dataclass
 class Conference(Bib):
     """Equal to inproceedings
-
-    Attributes:
-        author (str)
-        title (str)
-        booktitle (str)
-        year (int)
-        editor (str, optional)
-        number (int, optional)
-        volume (str, optional)
-        series (str, optional)
-        address (str, optional)
-        page (str, optional)
-        month (str, optional)
-        organization (str, optional)
-        publisher (str, optional)
-        note (str, optional)
     """
     author: str
     title: str
@@ -148,22 +96,6 @@ class Conference(Bib):
 @dataclass
 class InBook(Bib):
     """A section of a book without its own title.
-
-    Attributes:
-        title (str)
-        year (int)
-        author (str)
-        publisher (str)
-        pages (str)
-        chapter (str, optional)
-        address (str, optional)
-        edition (str, optional)
-        editor (str, optional)
-        month (str, optional)
-        note (str, optional)
-        number (int, optional)
-        series (str, optional)
-        volume (str, optional)
     """
     title: str
     year: int
@@ -184,24 +116,6 @@ class InBook(Bib):
 @dataclass
 class InCollection(Bib):
     """A section of a book having its own title.
-
-    Attributes:
-        author (str)
-        title (str)
-        booktitle (str)
-        year (int)
-        publisher (str)
-        editor (str, optional)
-        number (int, optional)
-        volume (str, optional)
-        series (str, optional)
-        typ (str, optional)
-        chapter (str, optional)
-        pages (str, optional)
-        address (str, optional)
-        edition (str, optional)
-        month (str, optional)
-        note (str, optional)
     """
     author: str
     title: str
@@ -223,39 +137,13 @@ class InCollection(Bib):
 
 class InProceedings(Conference):
     """An article in a conference proceedings.
-
-    Attributes:
-        author (str)
-        title (str)
-        booktitle (str)
-        year (int)
-        editor (str, optional)
-        number (int, optional)
-        volume (str, optional)
-        series (str, optional)
-        address (str, optional)
-        page (str, optional)
-        month (str, optional)
-        organization (str, optional)
-        publisher (str, optional)
-        note (str, optional)
     """
     pass
 
 
 @dataclass
 class Manual(Bib):
-    """Technical manual
-
-    Attributes:
-        title (str)
-        author (str, optional)
-        organization (str, optional)
-        address (str, optional)
-        edition (str, optional)
-        month (str, optional)
-        year (int, optional)
-        note (str, optional)
+    """Technical manual.
     """
     title: str
     author: Optional[str] = None
@@ -269,17 +157,7 @@ class Manual(Bib):
 
 @dataclass
 class MasterThesis(Bib):
-    """Master's thesis
-
-    Attributes:
-        author (str)
-        title (str)
-        school (str)
-        year (int)
-        typ (str, optional)
-        address (str, optional)
-        month (str, optional)
-        note (str, optional)
+    """Master's thesis.
     """
     author: str
     title: str
@@ -293,15 +171,7 @@ class MasterThesis(Bib):
 
 @dataclass
 class Misc(Bib):
-    """Template useful for other kinds of publication
-
-    Attributes:
-        author (str, optional)
-        title (str, optional)
-        howpublished (str, optional)
-        month (str, optional)
-        year (int, optional)
-        note (str, optional)
+    """Template useful for other kinds of publication.
     """
     author: Optional[str] = None
     title: Optional[str] = None
@@ -312,17 +182,7 @@ class Misc(Bib):
 
 
 class PhdThesis(MasterThesis):
-    """Ph.D. thesis
-
-    Attributes:
-        author (str)
-        title (str)
-        school (str)
-        year (int)
-        typ (str, optional)
-        address (str, optional)
-        month (str, optional)
-        note (str, optional)
+    """Ph.D. thesis.
     """
     pass
 
@@ -330,19 +190,6 @@ class PhdThesis(MasterThesis):
 @dataclass
 class Proceedings(Bib):
     """The proceedings of a conference.
-
-    Attributes:
-        title (str)
-        year (int)
-        editor (str, optional)
-        number (int, optional)
-        volume (str, optional)
-        series (str, optional)
-        address (str, optional)
-        month (str, optional)
-        organization (str, optional)
-        publisher (str, optional)
-        note (str, optional)
     """
     title: str
     year: int
@@ -360,17 +207,6 @@ class Proceedings(Bib):
 @dataclass
 class TechReport(Bib):
     """Technical report from educational, commercial or standardization institution.
-
-    Attributes:
-        author (str)
-        title (str)
-        institution (str)
-        year (int)
-        typ (str, optional)
-        number (int, optional)
-        address (str, optional)
-        month (str, optional)
-        note (str, optional)
     """
     author: str
     title: str
@@ -386,13 +222,6 @@ class TechReport(Bib):
 @dataclass
 class Unpublished(Bib):
     """An unpublished article, book, thesis, etc.
-
-    Attributes:
-        author (str)
-        title (str)
-        note (str)
-        month (str, optional)
-        year (int, optional)
     """
     author: str
     title: str
@@ -403,9 +232,6 @@ class Unpublished(Bib):
 
 class Bibliography(File):
     """Bib file
-
-    Attributes:
-        bib_list (list[Bib]): bibliography list.
     """
     file_type = 'bib'
     bib_list: list[Bib] = []

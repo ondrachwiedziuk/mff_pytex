@@ -97,10 +97,6 @@ class Document(Environment):
 
 class TexFile(File):
     """TeX file.
-
-    Attributes:
-        preamble (Preamble): preamble defining structure of file.
-        document (Document): Main body of a file.
     """
     file_type = 'tex'
     preamble: Preamble = Preamble()

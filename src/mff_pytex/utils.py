@@ -10,10 +10,6 @@ from os import path
 
 class File:
     """Abstract class for generating files.
-
-    Attributes:
-        file_type (str): Type of created file eg. 'tex', 'bib'.
-        file_path (str): Path to initialized file.
     """
     file_type: str
     file_path: str
