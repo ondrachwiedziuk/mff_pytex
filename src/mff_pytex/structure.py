@@ -49,7 +49,7 @@ class Preamble:
             str: Preamble in TeX form.
         """
         text = Writing()
-
+        text.write(*map(str, get_packages()))
         text.write('')
         text.write(self.title)
         text.write(self.author)

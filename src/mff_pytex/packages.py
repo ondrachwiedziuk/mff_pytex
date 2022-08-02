@@ -16,17 +16,47 @@ class Package:
 package_list: list[Package] = list()
 
 
-def add_package():
+def find_package(package: Package) -> bool:
+    """Find package in package_list
+
+    Args:
+        package (Package)
+
+    Returns:
+        bool
+    """
     global package_list
-    pass
+    for pkg in package_list:
+        if pkg.name == package.name:
+            return True
+    return False
 
 
-def get_packages():
+def add_package(*packages: Package) -> None:
+    """Adds packages to package_list
+
+    Args:
+        *packages (Package): packages to add.
+    """
     global package_list
-    pass
+    for package in packages:
+        if not find_package(package):
+            package_list.append(package)
 
 
-def clear_packages():
+def get_packages() -> list[Package]:
+    """Returns package_list
+
+    Returns:
+        list[Package]: package_list
+    """
+    global package_list
+    return package_list
+
+
+def clear_packages() -> None:
+    """Clears package_list
+    """
     global package_list
     package_list.clear()
 
