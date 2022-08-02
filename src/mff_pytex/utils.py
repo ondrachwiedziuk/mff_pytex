@@ -8,6 +8,15 @@ from typing_extensions import Self
 from os import path
 
 
+def get_func_name() -> str:
+    """Utility that returns name of function.
+
+    Returns:
+        str: Name of function.
+    """
+    return sys._getframe(1).f_code.co_name
+
+
 def get_dir() -> str:
     """Returns directory where main file has been executed.
 
@@ -69,28 +78,6 @@ def doublecommand(comm: str, main: str, second: Optional[str], opt: bool = False
         return f"\\{comm}{{{main}}} [{second}]"
     else:
         return f"\\{comm}{{{main}}} {{{second}}}"
-
-
-class TemplateProperty:
-    """Abstract descriptor class.
-
-    Example:
-        class Example:
-            attr = TemplateProperty()
-
-    Attributes:
-        public_name (str): public name of attribute.
-        protected_name (str): protected name of attribute.
-    """
-    def __set_name__(self, owner, name: str) -> None:
-        """Initialize given attribute by name.
-
-        Args:
-            owner: Class with given attribute.
-            name (str): Name of attribute.
-        """
-        self.public_name = name
-        self.private_name = f'_{name}'
 
 
 class Writing:
