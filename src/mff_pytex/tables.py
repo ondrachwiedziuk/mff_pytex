@@ -4,13 +4,14 @@ from typing import Any, Optional, Union
 from collections.abc import Sequence
 from mff_pytex.utils import command, Environment
 from mff_pytex.exeptions import WrongTypeListError
+from mff_pytex.packages import add_package, Package
 from pandas import DataFrame
 
 
 class Table:
     """Table structure. Converts pandas' dataframe to TeX table.
     Note:
-        Requires booktabs package to import, add with autopackage management.
+        Requires booktabs package to import, added with autopackage management.
 
     Attributes:
         df (DataFrame): Dataframe containing table.
@@ -27,6 +28,7 @@ class Table:
         """
         self.df = dataframe
         self.styles = styles
+        add_package(Package('booktabs'))
 
     def __str__(self) -> str:
         return self.df.to_latex(**self.styles)

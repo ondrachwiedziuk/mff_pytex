@@ -3,12 +3,17 @@
 from typing import Optional
 from dataclasses import dataclass
 from mff_pytex.utils import File
+from mff_pytex.packages import add_package, Package
+
 
 @dataclass
 class Bib:
     """Abstract class for bibliography.
     """
     name: str
+
+    def __post_init__(self) -> None:
+        add_package(Package('natbib'))
 
     def __str__(self) -> str:
         """Generate a record of given bibliography
@@ -232,6 +237,9 @@ class Unpublished(Bib):
 
 class Bibliography(File):
     """Bib file
+
+    Note:
+        Requires natbib package to import, added with autopackage management.
     """
     file_type = 'bib'
     bib_list: list[Bib] = []

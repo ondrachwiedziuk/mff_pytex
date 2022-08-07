@@ -1,7 +1,6 @@
 """Basic utils for work with LaTeX documents."""
 
 
-from datetime import date as datum
 from typing import Optional
 import sys
 from typing_extensions import Self

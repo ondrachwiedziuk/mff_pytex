@@ -2,7 +2,7 @@
 
 from datetime import date as datum
 from typing import Optional
-from mff_pytex.utils import command, get_dir, Writing, Environment, get_func_name, File
+from mff_pytex.utils import command, Writing, Environment, get_func_name, File
 import os
 from dataclasses import dataclass
 from mff_pytex.packages import get_packages
@@ -94,6 +94,7 @@ class Document(Environment):
     def listoftables(self) -> None:
         """Adds a listoftables command to the TeX file."""
         self.write(command(get_func_name()))
+
 
 class TexFile(File):
     """TeX file.
