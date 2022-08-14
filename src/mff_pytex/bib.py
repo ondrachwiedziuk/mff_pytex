@@ -1,6 +1,6 @@
 """Utilities for bibliography."""
 
-from typing import Optional
+from typing import Optional, List
 from dataclasses import dataclass
 from mff_pytex.utils import File
 from mff_pytex.packages import add_package, Package
@@ -242,7 +242,7 @@ class Bibliography(File):
         Requires natbib package to import, added with autopackage management.
     """
     file_type = 'bib'
-    bib_list: list[Bib] = []
+    bib_list: List[Bib] = []
 
     def create(self, mode: str = 'w+') -> None:
         bib = open(self.file_path, mode)
