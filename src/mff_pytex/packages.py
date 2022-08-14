@@ -2,6 +2,7 @@
 
 
 from mff_pytex.utils import command
+from typing import List
 
 
 class Package:
@@ -26,7 +27,7 @@ class Package:
         return command('usepackage', self.name, *self.optional)
 
 
-package_list: list[Package] = list()
+package_list: List[Package] = list()
 """Package_list contains all packages used in tex document."""
 
 
