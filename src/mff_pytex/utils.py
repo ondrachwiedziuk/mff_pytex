@@ -127,6 +127,14 @@ class Writing:
         """
         self.write(str(environment))
 
+    def math(self, formula: str) -> None:
+        """Add math formula to the TeX file.
+
+        Args:
+            formula (str): Used formula
+        """
+        self.write(f"\\[{formula}\\]")
+
 
 class Environment(Writing):
     """Basic environment structure.

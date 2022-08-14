@@ -21,14 +21,6 @@ mff\_pytex.bib module
    :undoc-members:
    :show-inheritance:
 
-mff\_pytex.custom module
-------------------------
-
-.. automodule:: mff_pytex.custom
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 mff\_pytex.exeptions module
 ---------------------------
 
@@ -37,26 +29,10 @@ mff\_pytex.exeptions module
    :undoc-members:
    :show-inheritance:
 
-mff\_pytex.format module
-------------------------
-
-.. automodule:: mff_pytex.format
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 mff\_pytex.images module
 ------------------------
 
 .. automodule:: mff_pytex.images
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-mff\_pytex.math module
-----------------------
-
-.. automodule:: mff_pytex.math
    :members:
    :undoc-members:
    :show-inheritance:
