@@ -59,7 +59,7 @@ def add_package(*packages: Package) -> None:
             package_list.append(package)
 
 
-def get_packages() -> list[Package]:
+def get_packages() -> List[Package]:
     """Returns package_list
 
     Returns:
