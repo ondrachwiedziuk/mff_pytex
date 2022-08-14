@@ -42,7 +42,7 @@ class List(Environment):
 
         Args:
             arr (Sequence | Dict): Sequence which is iterated. Only dictionary is compactible with 'descrition'.
-            en_type (str): Type of list
+            en_type (str, optional): Type of list. Defaults to 'itemize'.
         """
         self.en_type = en_type
         if self.en_type == 'description' and not isinstance(arr, dict):
@@ -78,8 +78,3 @@ class List(Environment):
         else:
             for item in arr:
                 self.item(str(item))
-
-
-class NestedList(List):
-    # TODO all
-    pass

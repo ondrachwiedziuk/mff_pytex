@@ -107,7 +107,7 @@ class TexFile(File):
         """Creates file and writes its content.
 
         Args:
-            mode (str): mode of given file. Same as open() function.
+            mode (str): mode of given file. Same as open() function. Defaults to 'w+'
         """
         tex = open(self.file_path, mode)
         tex.write(str(self.preamble))
@@ -118,7 +118,7 @@ class TexFile(File):
         """Creates pdf file, if neccessary writes its content and create pdf document.
 
         Args:
-            mode (str): mode of given file. Same as open() function.
+            mode (str): mode of given file. Same as open() function. Defaults to 'r'.
         """
         if mode not in ['r']:
             self.create(mode)

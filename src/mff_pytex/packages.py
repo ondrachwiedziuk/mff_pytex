@@ -5,15 +5,29 @@ from mff_pytex.utils import command
 
 
 class Package:
+    """Package class for adding packages to tex file.
+    """
     def __init__(self, name: str, *params: str) -> None:
+        """Initialize Package
+
+        Args:
+            name (str): Name of package.
+            *params (str, optional): Optional parameters for package
+        """
         self.name = name
         self.optional = params
 
     def __str__(self) -> str:
+        """Return content string in tex form
+
+        Returns:
+            str: Content.
+        """
         return command('usepackage', self.name, *self.optional)
 
 
 package_list: list[Package] = list()
+"""Package_list contains all packages used in tex document."""
 
 
 def find_package(package: Package) -> bool:
@@ -59,5 +73,3 @@ def clear_packages() -> None:
     """
     global package_list
     package_list.clear()
-
-# TODO Autoimport packages by used environments and commands

@@ -59,7 +59,7 @@ def command(comm: str, main: Optional[str] = None, *params) -> str:
 
     Args:
         comm (str): Name of command
-        main (str): Main parameter of command, defaults None
+        main (str| None, optional): Main parameter of command, defaults to None.
         *params (str): Optional parameters of command
 
     Returns:
@@ -73,7 +73,7 @@ def command(comm: str, main: Optional[str] = None, *params) -> str:
         return f"\\{comm}{{{main}}}"
 
 
-def doublecommand(comm: str, main: str, second: Optional[str], opt: bool = False) -> str:
+def doublecommand(comm: str, main: str, second: Optional[str] = None, opt: bool = False) -> str:
     """Template for creating doublecommands.
 
     Commands lokks like this \\comm{main} {second}
@@ -81,8 +81,8 @@ def doublecommand(comm: str, main: str, second: Optional[str], opt: bool = False
     Args:
         comm (str): Name of command
         main (str): First parameter
-        second (str): Second parameter
-        opt (bool): Set if the second parameter is optional
+        second (str | None, optional): Second parameter
+        opt (bool, optional): Set if the second parameter is optional. Defaults None
 
     Returns:
         str: string of given command by given parameters.
@@ -156,6 +156,3 @@ class Environment(Writing):
             str: Content
         """
         return self._text + command('end', self.en_type) + '\n'
-
-    def math(self, formula: str) -> None:
-        self.write(f"\\[ {formula} \\]")
