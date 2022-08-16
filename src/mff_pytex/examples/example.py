@@ -1,10 +1,15 @@
-from mff_pytex.structure import TexFile
+import mff_pytex as ptx
+from datetime import date
 
-tex = TexFile('foo')
-tex.preamble.author = 'Ondra'
-tex.preamble.title = 'Example'
 
-tex.document.math("\\frac{1}{2}")
-tex.document.newpage()
+texfile = ptx.TexFile('myfile')
 
-tex.create()
+preamble = texfile.preamble
+preamble.author = 'John Smith'
+preamble.title = 'My fist document'
+preamble.date = date.today()
+preamble.documentclass = ptx.DocumentClass('arcticle')
+
+texfile.create()
+
+texfile.make_pdf()
