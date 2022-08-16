@@ -53,9 +53,9 @@ class Preamble(Writing):
         text.write('')
         text.write(self._text)
         text.write('')
-        text.write(self.title)
-        text.write(self.author)
-        text.write(str(self.date))
+        text.write(command('title', self.title))
+        text.write(command('author', self.author))
+        text.write(command('date', str(self.date)))
         return str(text)
 
 
