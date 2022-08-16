@@ -34,7 +34,7 @@ class DocumentClass:
 
 
 @dataclass
-class Preamble:
+class Preamble(Writing):
     """Preamble contains basic info about author and document.
     """
     documentclass: Optional[DocumentClass] = None
@@ -50,6 +50,8 @@ class Preamble:
         """
         text = Writing()
         text.write(*map(str, get_packages()))
+        text.write('')
+        text.write(self._text)
         text.write('')
         text.write(self.title)
         text.write(self.author)
