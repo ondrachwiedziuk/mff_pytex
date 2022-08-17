@@ -7,7 +7,6 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   mff_pytex.examples
    mff_pytex.interface
 
 Submodules
@@ -21,10 +20,10 @@ mff\_pytex.bib module
    :undoc-members:
    :show-inheritance:
 
-mff\_pytex.exeptions module
----------------------------
+mff\_pytex.exceptions module
+----------------------------
 
-.. automodule:: mff_pytex.exeptions
+.. automodule:: mff_pytex.exceptions
    :members:
    :undoc-members:
    :show-inheritance:
