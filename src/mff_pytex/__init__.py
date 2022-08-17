@@ -4,10 +4,10 @@ __author__ = """Ondřej Chwiedziuk"""
 __email__ = 'ondrachwiedziuk@gmail.com'
 __version__ = '0.4.0'
 
-from bib import *
-from images import *
-from packages import *
-from structure import *
-from tables import *
-from utils import *
-from exceptions import *
+from mff_pytex.bib import *
+from mff_pytex.images import *
+from mff_pytex.packages import *
+from mff_pytex.structure import *
+from mff_pytex.tables import *
+from mff_pytex.utils import *
+from mff_pytex.exceptions import *

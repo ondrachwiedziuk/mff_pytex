@@ -3,7 +3,7 @@
 from typing import Any, Optional, Union
 from collections.abc import Sequence
 from mff_pytex.utils import command, Environment
-from mff_pytex.exeptions import WrongTypeListError
+from mff_pytex.exceptions import WrongTypeListError
 from mff_pytex.packages import add_package, Package
 from pandas import DataFrame
 

@@ -37,7 +37,7 @@ class DocumentClass:
 class Preamble(Writing):
     """Preamble contains basic info about author and document.
     """
-    documentclass: Optional[DocumentClass] = None
+    documentclass: DocumentClass = DocumentClass('article')
     author: Optional[str] = None
     title: Optional[str] = None
     date: Optional[datum] = None
@@ -49,6 +49,8 @@ class Preamble(Writing):
             str: Preamble in TeX form.
         """
         text = Writing()
+        text.write(str(self.documentclass))
+        text.write('')
         text.write(*map(str, get_packages()))
         text.write('')
         text.write(self._text)
