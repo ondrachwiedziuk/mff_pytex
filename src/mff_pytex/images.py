@@ -40,6 +40,8 @@ class Picture(Environment):
             self.write(command('includegraphics', self.picture_path, *self.settings))
         else:
             self.write(command('includegraphics', self.picture_path))
-        self.write(command('label', self.label))
-        self.write(command('caption', self.caption))
+        if self.label is not None:
+            self.write(command('label', self.label))
+        if self.caption is not None:
+            self.write(command('caption', self.caption))
         return self._text + command('end', self.en_type) + '\n'

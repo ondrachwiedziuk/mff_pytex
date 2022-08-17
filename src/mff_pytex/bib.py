@@ -245,6 +245,20 @@ class Bibliography(File):
     bib_list: List[Bib] = []
 
     def create(self, mode: str = 'w+') -> None:
+        """Creates .bib file
+
+        Args:
+            mode (str, optional): Mode of given file. Same as open() function. Defaults to 'w+'
+        """
         bib = open(self.file_path, mode)
         bib.write(*map(str, self.bib_list))
         bib.close()
+
+    def add(self, *bibs: Bib) -> None:
+        """Adds a book, etc. to the list of bibliohraphy.
+
+        Args:
+            *bibs (Bib): A Bib object
+        """
+        for bib in bibs:
+            self.bib_list.append(bib)

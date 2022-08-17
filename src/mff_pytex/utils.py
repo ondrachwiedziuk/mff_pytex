@@ -1,9 +1,8 @@
 """Basic utils for work with LaTeX documents."""
 
 
-from typing import Optional
+from typing import Optional, Any
 import sys
-from typing_extensions import Self
 from os import path
 
 
@@ -12,6 +11,7 @@ class File:
     """
     file_type: str
     file_path: str
+    file_name: str
 
     def __init__(self, file_name: str) -> None:
         """Initialize File
@@ -20,6 +20,7 @@ class File:
             file_name (str): Name of file which will be created.
         """
 
+        self.file_name = file_name
         self.file_path = f"{get_dir()}/{file_name}.{self.file_type}"
 
 
@@ -119,7 +120,7 @@ class Writing:
             if line is not None:
                 self._writeline(line)
 
-    def add(self, environment: Self) -> None:
+    def add(self, environment: Any) -> None:
         """Writes environment to the TeX file.
 
         Args:

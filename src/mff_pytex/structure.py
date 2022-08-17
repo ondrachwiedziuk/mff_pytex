@@ -87,9 +87,13 @@ class Document(Environment):
         """Adds a clearpage command to the TeX file."""
         self.write(command(get_func_name()))
 
-    def bibliography(self) -> None:
-        """Adds a bibliography command to the TeX file."""
-        self.write(command(get_func_name()))
+    def bibliography(self, name: str) -> None:
+        """Adds a bibliography command to the TeX file.
+
+        Args:
+            name (str): Name of a bib file
+        """
+        self.write(command(get_func_name(), name))
 
     def listoffigures(self) -> None:
         """Adds a listoffigures command to the TeX file."""
@@ -111,7 +115,7 @@ class TexFile(File):
         """Creates file and writes its content.
 
         Args:
-            mode (str): mode of given file. Same as open() function. Defaults to 'w+'
+            mode (str, optional): Mode of given file. Same as open() function. Defaults to 'w+'
         """
         tex = open(self.file_path, mode)
         tex.write(str(self.preamble))
@@ -122,8 +126,15 @@ class TexFile(File):
         """Creates pdf file, if neccessary writes its content and create pdf document.
 
         Args:
-            mode (str): mode of given file. Same as open() function. Defaults to 'r'.
+            mode (str, optional): mode of given file. Same as open() function. Defaults to 'r'.
         """
         if mode not in ['r']:
             self.create(mode)
+        print('first')
+        os.system(f"pdflatex {self.file_path}")
+        print('bib')
+        os.system(f"bibtex {self.file_name}")
+        print('second')
+        os.system(f"pdflatex {self.file_path}")
+        print('third')
         os.system(f"pdflatex {self.file_path}")
