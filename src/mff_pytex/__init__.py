@@ -2,7 +2,7 @@
 
 __author__ = """Ondřej Chwiedziuk"""
 __email__ = 'ondrachwiedziuk@gmail.com'
-__version__ = '0.4.1'
+__version__ = '0.4.2'
 
 from mff_pytex.bib import *
 from mff_pytex.images import *
